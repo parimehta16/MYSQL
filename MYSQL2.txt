@@ -1,0 +1,95 @@
+create database employeemgt;
+use employeemgt;
+
+CREATE TABLE emp3 (
+  empno decimal(4,0) NOT NULL,
+  ename varchar(10) default NULL,
+  job varchar(9) default NULL,
+  mgr decimal(4,0) default NULL,
+  hiredate date default NULL,
+  sal decimal(7,2) default NULL,
+  comm decimal(7,2) default NULL,
+  deptno decimal(2,0) default NULL
+);
+INSERT INTO emp3 VALUES ('7369','SMITH','CLERK','7902','1980-12-17','800.00',NULL,'20');
+INSERT INTO emp3 VALUES ('7499','ALLEN','SALESMAN','7698','1981-02-20','1600.00','300.00','30');
+INSERT INTO emp3 VALUES ('7521','WARD','SALESMAN','7698','1981-02-22','1250.00','500.00','30');
+INSERT INTO emp3 VALUES ('7566','JONES','MANAGER','7839','1981-04-02','2975.00',NULL,'20');
+INSERT INTO emp3 VALUES ('7654','MARTIN','SALESMAN','7698','1981-09-28','1250.00','1400.00','30');
+INSERT INTO emp3 VALUES ('7698','BLAKE','MANAGER','7839','1981-05-01','2850.00',NULL,'30');
+INSERT INTO emp3 VALUES ('7782','CLARK','MANAGER','7839','1981-06-09','2450.00',NULL,'10');
+INSERT INTO emp3 VALUES ('7788','SCOTT','ANALYST','7566','1982-12-09','3000.00',NULL,'20');
+INSERT INTO emp3 VALUES ('7839','KING','PRESIDENT',NULL,'1981-11-17','5000.00',NULL,'10');
+INSERT INTO emp3 VALUES ('7844','TURNER','SALESMAN','7698','1981-09-08','1500.00','0.00','30');
+INSERT INTO emp3 VALUES ('7876','ADAMS','CLERK','7788','1983-01-12','1100.00',NULL,'20');
+INSERT INTO emp3 VALUES ('7900','JAMES','CLERK','7698','1981-12-03','950.00',NULL,'30');
+INSERT INTO emp3 VALUES ('7902','FORD','ANALYST','7566','1981-12-03','3000.00',NULL,'20');
+INSERT INTO emp3 VALUES ('7934','MILLER','CLERK','7782','1982-01-23','1300.00',NULL,'10');
+select * from emp3 
+
+CREATE TABLE dept3 (
+  deptno decimal(2,0) default NULL,
+  dname varchar(14) default NULL,
+  loc varchar(13) default NULL
+);
+INSERT INTO dept3 VALUES ('10','ACCOUNTING','NEW YORK');
+INSERT INTO dept3 VALUES ('20','RESEARCH','DALLAS');
+INSERT INTO dept3 VALUES ('30','SALES','CHICAGO');
+INSERT INTO dept3 VALUES ('40','OPERATIONS','BOSTON');
+select * from dept3 
+
+select * from emp3 where deptno = 10; 
+select ename, job, hiredate from emp3 where deptno = 10;
+select ename, sal, deptno from emp3 where sal > 1500 and deptno = 30;
+
+select ename, sal, deptno from emp3 where sal > 1500 or deptno = 30; 
+
+select ename, sal from emp3 where sal >= 2450 and sal <= 500;
+select ename, sal from emp3 where sal between 2450 and 5000; 
+
+select * from emp3;
+select ename, job from emp3 where job = 'SALESMAN' or job = 'CLERK' or job = 'MANAGER'; 
+select ename, job from emp3 where job in ('SALESMAN', 'CLERK', 'MANAGER'); 
+select ename, job from emp3 where job not in ('SALESMAN', 'CLERK', 'MANAGER'); 
+
+select * from emp3; 
+select ename, sal, sal * 12 as 'ANNUAL SALARY' from emp3; 
+select ename, sal, sal * 12 as 'ANNUAL SALARY', sal /26 as 'Daily Wage'  from emp3; 
+select ename, deptno, job, sal/ 26 as 'daily wage' from emp3 where deptno in(20, 30) and job in('SALESMAN', 'CLERK'); 
+
+select *from emp3 where ename like '%r';
+select *from emp3 where ename like 's%';
+select *from emp3 where ename like 'b%e';
+select *from emp3 where ename like '%%r';
+select *from emp3 where hiredate like '%28' ;
+
+select *from emp3;
+select *from emp3 where ename like 'ki__';
+select *from emp3 where ename like  'w__d';
+select *from emp3 where ename like '___d';
+select *from emp3 where hiredate like '%02%__';
+select *from emp3 where hiredate like '%12%';
+select *from emp3 where hiredate like '__%12%__';
+
+select *from emp3 where  hiredate not like '1981%';
+
+select * from emp3 where sal between 1500 and 3000;
+
+select * from emp3 where comm is null; 
+select * from emp3 where comm is not null; 
+
+select distinct job from emp3;
+select * from emp3 limit 5; 
+select * from emp3 limit 3, 7; 
+
+create table student(rollno int(3), name varchar(20), course varchar(20), fees int(11));
+desc student;  
+
+insert into student values(1, "kalyani", "java", 34500);
+alter table student  add column city varchar(30); 
+select * from student; 
+
+alter table student add column phone int, add column email varchar(50); 
+alter table student modify column course varchar(50); 
+
+alter table student change column phone phone_number int; 
