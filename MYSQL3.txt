@@ -1,0 +1,24 @@
+create database pet; 
+use pet;
+create table pet(pet_name varchar(20), pet_age int, pet_description varchar(30), pet_price int);
+select * from pet;
+alter table pet add column pet_food varchar(20), add column pet_breed varchar(30); 
+
+insert into pet values("tommy", "2", "dog", "30000", "pedigree", "toy poodle");
+insert into pet values("tinku", "8", "cat", "39086", "cat fodd", "persian cat");
+insert into pet values("bob", "3", "fish", "27475", "fish food", "catfish");
+insert into pet values("raju", "6", "dog", "26457", "pedigree", "labrador");
+insert into pet values("meow", "4", "cat", "57536", "cat food", "persian cat");
+select * from pet;
+
+select * from pet where pet_age > 5; 
+select * from pet where pet_breed = "labrador";
+select * from pet where pet_price between 34000 and 56000;
+select * from pet where pet_food = "pedigree"; 
+
+select pet_description as pet_descriptions from pet; 
+alter table pet modify column pet_descriptions varchar(150); 
+select * from pet;
+select * from pet where pet_age > 7;
+update pet set pet_price = 20000 where pet_age >7;
+delete from pet where pet_price <10000; 
