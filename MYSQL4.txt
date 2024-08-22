@@ -1,0 +1,46 @@
+create database extra; 
+use extra; 
+
+create table customer (
+customer_id int primary key not null check (customer_id > 0),
+customer_name varchar(40) not null, 
+customer_password int check (length (customer_password) between 6 and 10)) ;
+
+create table product ( 
+product_id int primary key not null, 
+customer_id int, 
+product_name varchar(40) unique not null, 
+product_qty int check ( product_qty > 0 ), 
+constraint fk_3 foreign key (customer_id) references customer(customer_id));
+
+insert into customer values ( 1, "Pari", 1238901);
+
+insert into customer values ( 1, "sana", 178901);
+/*17:55:27	insert into customer values ( 1, "sana", 178901)	Error Code: 1062. Duplicate entry '1' for key 'customer.PRIMARY'	0.000 sec*/
+insert into customer values ( 2, "sana", 178901);
+
+insert into customer values ( 3, "aarav", 1234901);
+
+insert into customer values ( 4, "rihan", 11);
+/*17:56:41	insert into customer values ( 4, "rihan", 11)	Error Code: 3819. Check constraint 'customer_chk_2' is violated.	0.000 sec*/
+insert into customer values ( 4, "rihan", 113952);
+
+insert into customer values ( 5, "anushka", 1456701);
+
+insert into product values (1, 1, "laptop", 2);
+
+insert into product values (2, 1, "phone", 8);
+
+insert into product values (1, 1, "Ipad", 3);
+/*17:59:52	insert into product values (1, 1, "Ipad", 3)	Error Code: 1062. Duplicate entry '1' for key 'product.PRIMARY'	0.000 sec*/
+insert into product values (3, 1, "Ipad", 3);
+
+insert into product values (4, 1, "Ipad", 5);
+/*18:02:22	insert into product values (4, 1, "Ipad", 5)	Error Code: 1062. Duplicate entry 'Ipad' for key 'product.product_name'	0.000 sec
+*/
+insert into product values (4, 3, "Watch", 5);
+
+delete from customer where customer_id = 1;
+/*18:04:32	delete from customer where customer_id = 1	Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails (`extra`.`product`, CONSTRAINT `fk_3` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`))	0.016 sec
+*/
+
